@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HIMANIKA | Himpunan Mahasiswa Teknik Elektronika</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+        .bg-dark {
+            background-color: #121212;
+        }
+        .bg-dark-card {
+            background-color: #1e1e1e;
+        }
+        .bg-dark-hover:hover {
+            background-color: #2a2a2a;
+        }
+        .text-primary {
+            color: #D62828;
+        }
+        .border-primary {
+            border-color: #D62828;
+        }
+        .btn-primary {
+            background: #D62828;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #b71c1c;
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(214, 40, 40, 0.4);
+        }
+        .btn-outline-primary {
+            background: transparent;
+            border: 2px solid #D62828;
+            color: #D62828;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .btn-outline-primary:hover {
+            background: #D62828;
+            color: white;
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #555;
+            color: #ccc;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            border-color: #D62828;
+            color: white;
+        }
+        .navbar-transparent {
+            background: transparent;
+            transition: background 0.3s;
+        }
+        .navbar-scrolled {
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.85) 0%, rgba(18, 18, 18, 0.5) 100%), url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(214, 40, 40, 0.25);
+        }
+        input,
+        textarea,
+        select {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: #f0f0f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            width: 100%;
+            transition: 0.2s;
+        }
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #D62828;
+            box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.2);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #333;
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e1e1e;
+            padding: 16px 32px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            z-index: 2000;
+            display: none;
+            animation: slideUp 0.3s ease;
+        }
+        .toast.show {
+            display: block;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        .tab-active {
+            border-bottom: 3px solid #D62828;
+            color: #D62828;
+        }
+        .dashboard-card {
+            background: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .dashboard-card:hover {
+            border-color: #D62828;
+            transform: translateY(-4px);
+        }
+        .dashboard-card i {
+            font-size: 2rem;
+            color: #D62828;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .admin-table th,
+        .admin-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .admin-table th {
+            color: #D62828;
+            font-weight: 600;
+        }
+        .admin-table tr:hover {
+            background: #2a2a2a;
+        }
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-success {
+            background: #0d7a3e;
+            color: #8cffb0;
+        }
+        .badge-warning {
+            background: #7a5a0d;
+            color: #ffd78c;
+        }
+        .badge-danger {
+            background: #7a0d0d;
+            color: #ff8c8c;
+        }
+        .badge-info {
+            background: #0d3a7a;
+            color: #8cc4ff;
+        }
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #D62828;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 6px 20px rgba(214, 40, 40, 0.4);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .hidden {
+            display: none !important;
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .grid-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .grid-gallery img:hover {
+            transform: scale(1.02);
+            border: 2px solid #D62828;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 12px;
+            border: 2px solid #D62828;
+        }
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .admin-table {
+                font-size: 14px;
+            }
+            .admin-table th,
+            .admin-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Back to Top -->
+    <div id="backToTop" class="hover:bg-[#b71c1c]"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar-transparent fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-extrabold tracking-tight"><span class="text-[#D62828]">HIMANIKA</span></span>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium">
+            <a href="#home" class="hover:text-[#D62828] transition">Beranda</a>
+            <a href="#tentang" class="hover:text-[#D62828] transition">Tentang</a>
+            <a href="#struktur" class="hover:text-[#D62828] transition">Struktur</a>
+            <a href="#proker" class="hover:text-[#D62828] transition">Proker</a>
+            <a href="#berita" class="hover:text-[#D62828] transition">Berita</a>
+            <a href="#galeri" class="hover:text-[#D62828] transition">Galeri</a>
+            <a href="#dokumen" class="hover:text-[#D62828] transition">Dokumen</a>
+            <a href="#kontak" class="hover:text-[#D62828] transition">Kontak</a>
+            <a href="#dashboard" class="hover:text-[#D62828] transition" id="navDashboard">Dashboard</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <span id="userDisplay" class="text-sm hidden md:block"></span>
+            <button id="loginBtn" class="btn-outline-primary text-sm py-1.5 px-4 hidden md:inline-block">Login</button>
+            <button id="logoutBtn" class="btn-primary text-sm py-1.5 px-4 hidden md:inline-block" style="background:#555;padding:0.5rem 1.2rem;">Logout</button>
+            <button id="menuBtn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-screen bg-[#121212] z-40 flex flex-col items-center justify-center gap-6 text-xl font-medium transform -translate-y-full transition-transform duration-300 md:hidden">
+        <a href="#home" class="hover:text-[#D62828]">Beranda</a>
+        <a href="#tentang" class="hover:text-[#D62828]">Tentang</a>
+        <a href="#struktur" class="hover:text-[#D62828]">Struktur</a>
+        <a href="#proker" class="hover:text-[#D62828]">Proker</a>
+        <a href="#berita" class="hover:text-[#D62828]">Berita</a>
+        <a href="#galeri" class="hover:text-[#D62828]">Galeri</a>
+        <a href="#dokumen" class="hover:text-[#D62828]">Dokumen</a>
+        <a href="#kontak" class="hover:text-[#D62828]">Kontak</a>
+        <a href="#dashboard" class="hover:text-[#D62828]" id="mobileDashboard">Dashboard</a>
+        <button id="mobileLoginBtn" class="btn-primary mt-4">Login Admin</button>
+        <button id="mobileLogoutBtn" class="btn-primary hidden mt-2" style="background:#555;">Logout</button>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- HOME -->
+        <section id="home" class="hero-overlay min-h-screen flex items-center justify-center px-6 pt-20">
+            <div class="max-w-4xl text-center">
+                <h1 class="hero-title text-4xl md:text-6xl font-extrabold leading-tight">Selamat Datang di Website Resmi <span class="text-[#D62828]">HIMANIKA</span></h1>
+                <p class="text-xl md:text-2xl mt-4 text-gray-300">Himpunan Mahasiswa Teknik Elektronika</p>
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <a href="#tentang" class="btn-primary">Tentang Kami</a>
+                    <a href="#kontak" class="btn-outline-primary">Gabung HIMANIKA</a>
+                </div>
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-center max-w-2xl mx-auto">
+                    <div class="bg-dark-card p-4 rounded-xl border border-[#2a2a2a]"><span class="text-2xl font-bold text-[#D62828]" id="totalAnggota">120</span>
+                        <p class="text-sm">Anggota</p>
+                    </div>
+                    <div class="bg-dark-card p-4 rounded-xl border border-[#2a2a2a]"><span class="text-2xl font-bold text-[#D62828]" id="totalProker">15</span>
+                        <p class="text-sm">Program Kerja</p>
+                    </div>
+                    <div class="bg-dark-card p-4 rounded-xl border border-[#2a2a2a]"><span class="text-2xl font-bold text-[#D62828]">8</span>
+                        <p class="text-sm">Bidang</p>
+                    </div>
+                    <div class="bg-dark-card p-4 rounded-xl border border-[#2a2a2a]"><span class="text-2xl font-bold text-[#D62828]">5+</span>
+                        <p class="text-sm">Prestasi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TENTANG -->
+        <section id="tentang" class="py-20 px-6 bg-dark">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2 text-center"><span class="text-[#D62828]">Tentang</span> Kami</h2>
+                <p class="text-center text-gray-400 mb-12">Sejarah, Visi, Misi & Motto</p>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="bg-dark-card p-8 rounded-2xl border border-[#2a2a2a]">
+                        <h3 class="text-2xl font-bold text-[#D62828] mb-3">Sejarah</h3>
+                        <p class="text-gray-300 leading-relaxed">HIMANIKA didirikan pada tahun 2010 sebagai wadah mahasiswa Teknik Elektronika untuk mengembangkan potensi akademik, kepemimpinan, dan kepedulian sosial. Berawal dari sekelompok mahasiswa yang ingin menciptakan perubahan, HIMANIKA terus berkembang hingga menjadi organisasi yang solid dan inovatif.</p>
+                    </div>
+                    <div class="bg-dark-card p-8 rounded-2xl border border-[#2a2a2a]">
+                        <h3 class="text-2xl font-bold text-[#D62828] mb-3">Visi & Misi</h3>
+                        <p class="text-gray-300 font-semibold">Visi:</p>
+                        <p class="text-gray-300 mb-3">Menjadi organisasi mahasiswa yang unggul di bidang elektronika dan teknologi.</p>
+                        <p class="text-gray-300 font-semibold">Misi:</p>
+                        <ul class="list-disc list-inside text-gray-300 space-y-1">
+                            <li>Meningkatkan kompetensi akademik dan non-akademik.</li>
+                            <li>Membangun jiwa kepemimpinan dan kewirausahaan.</li>
+                            <li>Menjalin kerjasama dengan industri dan institusi.</li>
+                        </ul>
+                        <p class="text-gray-300 mt-4"><span class="font-bold text-[#D62828]">Motto:</span> "Electrifying Innovation, Inspiring Change"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRUKTUR -->
+        <section id="struktur" class="py-20 px-6 bg-dark-card">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Struktur</span> Organisasi</h2>
+                <p class="text-center text-gray-400 mb-12">Pengurus HIMANIKA periode 2025/2026</p>
+                <div id="strukturGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                </div>
+                <div class="text-center mt-8">
+                    <button id="editStrukturBtn" class="btn-secondary ">Edit Struktur</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRAM KERJA -->
+        <section id="proker" class="py-20 px-6 bg-dark">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Program</span> Kerja</h2>
+                <div class="flex justify-center gap-2 mt-4 mb-10 flex-wrap">
+                    <button class="filter-btn px-4 py-1 rounded-full border border-[#D62828] text-sm hover:bg-[#D62828] transition" data-filter="all">Semua</button>
+                    <button class="filter-btn px-4 py-1 rounded-full border border-[#D62828] text-sm hover:bg-[#D62828] transition" data-filter="akan datang">Akan Datang</button>
+                    <button class="filter-btn px-4 py-1 rounded-full border border-[#D62828] text-sm hover:bg-[#D62828] transition" data-filter="berjalan">Berjalan</button>
+                    <button class="filter-btn px-4 py-1 rounded-full border border-[#D62828] text-sm hover:bg-[#D62828] transition" data-filter="selesai">Selesai</button>
+                </div>
+                <div id="prokerGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+                <div class="text-center mt-8">
+                    <button id="tambahProkerBtn" class="btn-primary "><i class="fas fa-plus mr-2"></i>Tambah Program Kerja</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BERITA -->
+        <section id="berita" class="py-20 px-6 bg-dark-card">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Berita</span> Terkini</h2>
+                <div id="beritaGrid" class="mt-8 grid md:grid-cols-2 gap-6">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+                <div class="mt-6 max-w-md mx-auto">
+                    <input type="text" id="searchBerita" placeholder="Cari berita..." class="bg-dark-card border border-[#2a2a2a] rounded-full px-5 py-2 w-full text-sm" />
+                </div>
+                <div class="text-center mt-6">
+                    <button id="tambahBeritaBtn" class="btn-primary hidden"><i class="fas fa-plus mr-2"></i>Tambah Berita</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERI -->
+        <section id="galeri" class="py-20 px-6 bg-dark">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Galeri</span> Kegiatan</h2>
+                <div id="galeriGrid" class="grid-gallery mt-8">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+                <div class="text-center mt-8">
+                    <button id="tambahGaleriBtn" class="btn-primary hidden"><i class="fas fa-plus mr-2"></i>Tambah Foto</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <img id="lightboxImg" src="" alt="lightbox" />
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl bg-black/50 p-2 rounded-full">&times;</button>
+        </div>
+
+        <!-- DOKUMEN -->
+        <section id="dokumen" class="py-20 px-6 bg-dark-card">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Dokumen</span> & Arsip</h2>
+                <div id="dokumenGrid" class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8 text-center">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+                <div class="text-center mt-8">
+                    <button id="tambahDokumenBtn" class="btn-primary hidden"><i class="fas fa-plus mr-2"></i>Tambah Dokumen</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PENGUMUMAN -->
+        <section id="pengumuman" class="py-20 px-6 bg-dark">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Pengumuman</span></h2>
+                <div id="pengumumanList" class="space-y-6 mt-8">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+                <div class="text-center mt-8">
+                    <button id="tambahPengumumanBtn" class="btn-primary hidden"><i class="fas fa-plus mr-2"></i>Tambah Pengumuman</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- KALENDER -->
+        <section id="kalender" class="py-20 px-6 bg-dark-card">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2"><span class="text-[#D62828]">Kalender</span> Kegiatan</h2>
+                <div class="bg-dark p-6 rounded-2xl border border-[#2a2a2a] mt-6">
+                    <div class="grid grid-cols-7 gap-1 text-sm font-bold text-[#D62828]"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
+                    <div id="kalenderGrid" class="grid grid-cols-7 gap-1 mt-2 text-gray-300">
+                        <!-- Akan diisi oleh JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KONTAK -->
+        <section id="kontak" class="py-20 px-6 bg-dark">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Kontak</span> Kami</h2>
+                <div class="grid md:grid-cols-2 gap-10 mt-10">
+                    <div class="space-y-4">
+                        <p><i class="fas fa-map-pin text-[#D62828] w-6"></i> Jl. Elektronika No. 1, Kampus ITB</p>
+                        <p><i class="fas fa-envelope text-[#D62828] w-6"></i> himanika@elektronika.ac.id</p>
+                        <p><i class="fab fa-whatsapp text-[#D62828] w-6"></i> +62 812 3456 7890</p>
+                        <p><i class="fab fa-instagram text-[#D62828] w-6"></i> @himanika_official</p>
+                        <p><i class="fab fa-facebook text-[#D62828] w-6"></i> HIMANIKA Elektronika</p>
+                    </div>
+                    <div class="bg-dark-card p-4 rounded-xl border border-[#2a2a2a] h-64">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.314233190084!2d112.73356901477549!3d-7.300895994712793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbf1dcb5f2c5%3A0x9a7b3e7c1d3f4c5!2sInstitut%20Teknologi%20Bandung!5e0!3m2!1sen!2sid!4v1670000000000" width="100%" height="100%" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 mt-12">
+                    <div class="bg-dark-card p-6 rounded-2xl border border-[#2a2a2a]" id="formPendaftaran">
+                        <h3 class="text-xl font-bold mb-4">Form Anggota Baru</h3>
+                        <input id="daftarNama" class="mb-3" placeholder="Nama lengkap" />
+                        <input id="daftarEmail" class="mb-3" placeholder="Email" />
+                        <input id="daftarJurusan" class="mb-3" placeholder="Jurusan" />
+                        <button onclick="daftarAnggota()" class="btn-primary w-full">Daftar</button>
+                    </div>
+                    <div class="bg-dark-card p-6 rounded-2xl border border-[#2a2a2a]">
+                        <h3 class="text-xl font-bold mb-4">Kirim Pesan</h3>
+                        <input id="pesanNama" class="mb-3" placeholder="Nama" />
+                        <input id="pesanEmail" class="mb-3" placeholder="Email" />
+                        <textarea id="pesanIsi" rows="3" placeholder="Pesan..." class="mb-3"></textarea>
+                        <button onclick="kirimPesan()" class="btn-primary w-full">Kirim</button>
+                    </div>
+                </div>
+                <div class="mt-16 bg-dark-card p-8 rounded-2xl border border-[#2a2a2a]">
+                    <h3 class="text-2xl font-bold text-center mb-6">FAQ</h3>
+                    <div class="space-y-3">
+                        <p><span class="font-bold text-[#D62828]">Q:</span> Bagaimana cara bergabung? <span class="block text-gray-300">A: Klik tombol "Gabung HIMANIKA" atau datang ke sekretariat.</span></p>
+                        <p><span class="font-bold text-[#D62828]">Q:</span> Apakah ada iuran? <span class="block text-gray-300">A: Iuran anggota ditentukan setiap periode.</span></p>
+                        <p><span class="font-bold text-[#D62828]">Q:</span> Kapan kegiatan rutin? <span class="block text-gray-300">A: Setiap hari Jumat pukul 15.00 di ruang HIMANIKA.</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOGIN MODAL -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold"><span class="text-[#D62828]">Login</span> Admin</h2>
+                    <button onclick="closeLoginModal()" class="text-2xl hover:text-[#D62828]">&times;</button>
+                </div>
+                <div class="mb-4">
+                    <label>Username</label>
+                    <input id="loginUsername" placeholder="Masukkan username" />
+                </div>
+                <div class="mb-4">
+                    <label>Password</label>
+                    <input id="loginPassword" type="password" placeholder="Masukkan password" />
+                </div>
+                <button onclick="login()" class="btn-primary w-full">Masuk</button>
+                <p class="text-center text-sm text-gray-400 mt-4">Demo: 
+            </div>
+        </div>
+
+        <!-- DASHBOARD ADMIN -->
+        <section id="dashboard" class="py-20 px-6 bg-dark">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold"><span class="text-[#D62828]">Dashboard</span> Admin</h2>
+                        <p class="text-gray-400">Selamat datang, <span id="dashboardUser" class="text-[#D62828] font-semibold">Admin</span></p>
+                    </div>
+                    <button onclick="logout()" class="btn-secondary text-sm">Logout</button>
+                </div>
+
+                <!-- Statistik -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-dark-card p-6 rounded-xl border border-[#2a2a2a] text-center">
+                        <i class="fas fa-users text-3xl text-[#D62828]"></i>
+                        <p class="text-2xl font-bold mt-2" id="dashboardAnggota">0</p>
+                        <p class="text-sm text-gray-400">Total Anggota</p>
+                    </div>
+                    <div class="bg-dark-card p-6 rounded-xl border border-[#2a2a2a] text-center">
+                        <i class="fas fa-tasks text-3xl text-[#D62828]"></i>
+                        <p class="text-2xl font-bold mt-2" id="dashboardProker">0</p>
+                        <p class="text-sm text-gray-400">Program Kerja</p>
+                    </div>
+                    <div class="bg-dark-card p-6 rounded-xl border border-[#2a2a2a] text-center">
+                        <i class="fas fa-newspaper text-3xl text-[#D62828]"></i>
+                        <p class="text-2xl font-bold mt-2" id="dashboardBerita">0</p>
+                        <p class="text-sm text-gray-400">Berita</p>
+                    </div>
+                    <div class="bg-dark-card p-6 rounded-xl border border-[#2a2a2a] text-center">
+                        <i class="fas fa-image text-3xl text-[#D62828]"></i>
+                        <p class="text-2xl font-bold mt-2" id="dashboardGaleri">0</p>
+                        <p class="text-sm text-gray-400">Foto Galeri</p>
+                    </div>
+                </div>
+
+                <!-- Menu Kelola -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="dashboard-card text-center" onclick="openTab('berita')">
+                        <i class="fas fa-newspaper"></i>
+                        <p class="font-semibold mt-2">Kelola Berita</p>
+                        <p class="text-xs text-gray-400">Tambah & edit berita</p>
+                    </div>
+                    <div class="dashboard-card text-center" onclick="openTab('galeri')">
+                        <i class="fas fa-images"></i>
+                        <p class="font-semibold mt-2">Kelola Galeri</p>
+                        <p class="text-xs text-gray-400">Tambah & hapus foto</p>
+                    </div>
+                    <div class="dashboard-card text-center" onclick="openTab('struktur')">
+                        <i class="fas fa-users"></i>
+                        <p class="font-semibold mt-2">Kelola Pengurus</p>
+                        <p class="text-xs text-gray-400">Edit struktur organisasi</p>
+                    </div>
+                    <div class="dashboard-card text-center" onclick="openTab('proker')">
+                        <i class="fas fa-tasks"></i>
+                        <p class="font-semibold mt-2">Kelola Proker</p>
+                        <p class="text-xs text-gray-400">Program kerja</p>
+                    </div>
+                    <div class="dashboard-card text-center" onclick="openTab('dokumen')">
+                        <i class="fas fa-file-alt"></i>
+                        <p class="font-semibold mt-2">Kelola Dokumen</p>
+                        <p class="text-xs text-gray-400">Upload & hapus</p>
+                    </div>
+                    <div class="dashboard-card text-center" onclick="openTab('pengumuman')">
+                        <i class="fas fa-bullhorn"></i>
+                        <p class="font-semibold mt-2">Kelola Pengumuman</p>
+                        <p class="text-xs text-gray-400">Timeline pengumuman</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bg-[#0e0e0e] py-8 px-6 border-t border-[#2a2a2a] text-center text-sm text-gray-400">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 HIMANIKA - Himpunan Mahasiswa Teknik Elektronika</p>
+                <div class="flex gap-4">
+                    <a href="#"><i class="fab fa-instagram text-[#D62828]"></i></a>
+                    <a href="#"><i class="fab fa-facebook text-[#D62828]"></i></a>
+                    <a href="#"><i class="fab fa-twitter text-[#D62828]"></i></a>
+                    <a href="#"><i class="fab fa-youtube text-[#D62828]"></i></a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Modal Tambah/Edit -->
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="formModalTitle" class="text-2xl font-bold"><span class="text-[#D62828]">Tambah</span> Data</h2>
+                <button onclick="closeFormModal()" class="text-2xl hover:text-[#D62828]">&times;</button>
+            </div>
+            <div id="formModalBody">
+                <!-- Akan diisi oleh JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // DATA (disimpan di localStorage)
+        // ============================================
+        const DEFAULT_DATA = {
+            pengurus: [
+                { id: 1, nama: 'Muhammad Rizki', jabatan: 'Ketua Umum', foto: 'https://i.pravatar.cc/150?img=1' },
+                { id: 2, nama: 'Siti Aisyah', jabatan: 'Wakil Ketua', foto: 'https://i.pravatar.cc/150?img=2' },
+                { id: 3, nama: 'Andi Pratama', jabatan: 'Sekretaris', foto: 'https://i.pravatar.cc/150?img=3' },
+                { id: 4, nama: 'Rina Dewi', jabatan: 'Bendahara', foto: 'https://i.pravatar.cc/150?img=4' },
+                { id: 5, nama: 'Fajar Hidayat', jabatan: 'Bidang Akademik', foto: 'https://i.pravatar.cc/150?img=5' },
+                { id: 6, nama: 'Diana Kartika', jabatan: 'Bidang Kominfo', foto: 'https://i.pravatar.cc/150?img=6' },
+                { id: 7, nama: 'Eko Prasetyo', jabatan: 'Bidang Kewirausahaan', foto: 'https://i.pravatar.cc/150?img=7' },
+                { id: 8, nama: 'Lestari Handayani', jabatan: 'Bidang Sosmas', foto: 'https://i.pravatar.cc/150?img=8' }
+                
+            ],
+            proker: [
+                { id: 1, nama: 'Workshop IoT', deskripsi: 'Pelatihan dasar Internet of Things untuk anggota', tanggal: '20 Juli 2026',
+                    status: 'akan datang' },
+                { id: 2, nama: 'Lomba Robotik', deskripsi: 'Kompetisi robotika tingkat nasional', tanggal: '10-12 Juli 2026',
+                    status: 'berjalan' },
+                { id: 3, nama: 'Kunjungan Industri', deskripsi: 'Kunjungan ke PT. Elektronika Nusantara',
+                    tanggal: '5 Juni 2026', status: 'selesai' }
+            ],
+            berita: [
+                { id: 1, judul: 'HIMANIKA Raih Juara 1 LKTIN', tanggal: '12 Juli 2026',
+                    isi: 'Tim HIMANIKA berhasil meraih juara 1 dalam Lomba Karya Tulis Ilmiah Nasional.' },
+                { id: 2, judul: 'Pengumuman Pendaftaran Anggota Baru', tanggal: '1 Juli 2026',
+                    isi: 'Pendaftaran anggota baru dibuka hingga 31 Juli 2026. Daftar sekarang!' }
+            ],
+            galeri: [
+                'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&auto=format&fit=crop'
+            ],
+            dokumen: [
+                { id: 1, nama: 'AD/ART', ikon: 'fa-file-pdf' },
+                { id: 2, nama: 'Proposal', ikon: 'fa-file-pdf' },
+                { id: 3, nama: 'LPJ', ikon: 'fa-file-pdf' },
+                { id: 4, nama: 'SOP', ikon: 'fa-file-pdf' },
+                { id: 5, nama: 'Surat', ikon: 'fa-file-pdf' },
+                { id: 6, nama: 'Lainnya', ikon: 'fa-folder-open' }
+            ],
+            pengumuman: [
+                { id: 1, judul: 'Pendaftaran Anggota Baru', tanggal: '1 Juli 2026',
+                isi: 'Pendaftaran dibuka hingga 31 Juli.' },
+                { id: 2, judul: 'Workshop Desain PCB', tanggal: '15 Juni 2026',
+                isi: 'Workshop gratis untuk mahasiswa elektronika.' },
+                { id: 3, judul: 'Rapat Koordinasi Bidang', tanggal: '20 Juni 2026',
+                isi: 'Rapat koordinasi seluruh bidang.' }
+            ],
+            anggota: [
+                { id: 1, nama: 'Budi Santoso', email: 'budi@email.com', jurusan: 'Teknik Elektronika' },
+                { id: 2, nama: 'Citra Dewi', email: 'citra@email.com', jurusan: 'Teknik Komputer' }
+            ],
+            pesan: [
+                { id: 1, nama: 'Test User', email: 'test@email.com', isi: 'Ini pesan test' }
+            ],
+            users: [
+                { username: 'admin', password: 'himanika2026', role: 'admin' },
+                { username: 'user', password: 'user123', role: 'user' }
+            ]
+        };
+
+        let db = {};
+        let currentUser = null;
+        let currentEditId = null;
+        let currentEditType = null;
+
+        // ============================================
+        // FUNGSI DATABASE
+        // ============================================
+        function loadData() {
+            const saved = localStorage.getItem('himanika_db');
+            if (saved) {
+                db = JSON.parse(saved);
+            } else {
+                db = JSON.parse(JSON.stringify(DEFAULT_DATA));
+                saveData();
+            }
+            // Pastikan semua key ada
+            for (let key in DEFAULT_DATA) {
+                if (!db[key]) db[key] = JSON.parse(JSON.stringify(DEFAULT_DATA[key]));
+            }
+            saveData();
+        }
+
+        function saveData() {
+            localStorage.setItem('himanika_db', JSON.stringify(db));
+        }
+
+        function getNextId(arr) {
+            if (arr.length === 0) return 1;
+            return Math.max(...arr.map(item => item.id)) + 1;
+        }
+
+        // ============================================
+        // FUNGSI TOAST
+        // ============================================
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.borderColor = type === 'success' ? '#0d7a3e' : '#7a0d0d';
+            toast.style.borderLeft = `4px solid ${type === 'success' ? '#0d7a3e' : '#7a0d0d'}`;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ============================================
+        // FUNGSI LOGIN / AUTH
+        // ============================================
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+
+            const user = db.users.find(u => u.username === username && u.password === password);
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('himanika_user', JSON.stringify(user));
+                closeLoginModal();
+                updateUI();
+                showToast(`Selamat datang, ${user.username}!`);
+                document.getElementById('loginUsername').value = '';
+                document.getElementById('loginPassword').value = '';
+                // Scroll ke dashboard
+                document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                showToast('Username atau password salah!', 'error');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('himanika_user');
+            updateUI();
+            showToast('Anda telah logout');
+            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkAuth() {
+            const saved = localStorage.getItem('himanika_user');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                // Verifikasi user masih ada di db
+                const exists = db.users.find(u => u.username === currentUser.username);
+                if (!exists) {
+                    currentUser = null;
+                    localStorage.removeItem('himanika_user');
+                }
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            const isLoggedIn = currentUser !== null;
+            const isAdmin = isLoggedIn && currentUser.role === 'admin';
+
+            // Navbar buttons
+            document.getElementById('loginBtn').classList.toggle('hidden', isLoggedIn);
+            document.getElementById('logoutBtn').classList.toggle('hidden', !isLoggedIn);
+            document.getElementById('navDashboard').style.display = isLoggedIn ? 'inline' : 'none';
+
+            // Mobile
+            document.getElementById('mobileLoginBtn').classList.toggle('hidden', isLoggedIn);
+            document.getElementById('mobileLogoutBtn').classList.toggle('hidden', !isLoggedIn);
+            document.getElementById('mobileDashboard').style.display = isLoggedIn ? 'block' : 'none';
+
+            if (isLoggedIn) {
+                document.getElementById('userDisplay').textContent = `👤 ${currentUser.username}`;
+                document.getElementById('dashboardUser').textContent = currentUser.username;
+            } else {
+                document.getElementById('userDisplay').textContent = '';
+            }
+
+            // Tombol admin hanya untuk admin
+            const adminBtns = ['editStrukturBtn', 'tambahProkerBtn', 'tambahBeritaBtn', 'tambahGaleriBtn', 'tambahDokumenBtn',
+                'tambahPengumumanBtn'
+            ];
+            adminBtns.forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) btn.classList.toggle('hidden', !isAdmin);
+            });
+
+            // Update dashboard statistik
+            if (isLoggedIn) {
+                document.getElementById('dashboardAnggota').textContent = db.anggota.length;
+                document.getElementById('dashboardProker').textContent = db.proker.length;
+                document.getElementById('dashboardBerita').textContent = db.berita.length;
+                document.getElementById('dashboardGaleri').textContent = db.galeri.length;
+            }
+
+            // Refresh semua tampilan
+            renderStruktur();
+            renderProker();
+            renderBerita();
+            renderGaleri();
+            renderDokumen();
+            renderPengumuman();
+            renderKalender();
+            updateStats();
+        }
+
+        // ============================================
+        // RENDER FUNGSI
+        // ============================================
+        function renderStruktur() {
+    const grid = document.getElementById('strukturGrid');
+
+    grid.innerHTML = db.pengurus.map(p => `
+        <div class="bg-dark p-5 rounded-xl text-center border border-[#2a2a2a] card-hover">
+            <img src="${p.foto}" alt="${p.nama}" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-[#D62828] object-cover" />
+
+            <h4 class="font-bold">${p.nama}</h4>
+
+            <p class="text-sm text-[#D62828]">${p.jabatan}</p>
+
+            ${currentUser ? `
+                <div class="flex justify-center gap-3 mt-3">
+
+                    <button onclick="editPengurus(${p.id})"
+                        class="text-gray-400 hover:text-blue-500">
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                    <button onclick="hapusPengurus(${p.id})"
+                        class="text-gray-400 hover:text-red-500">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </div>
+            ` : ''}
+
+        </div>
+    `).join('');
+}
+
+        function renderProker() {
+            const grid = document.getElementById('prokerGrid');
+            grid.innerHTML = db.proker.map(p => {
+                const statusMap = {
+                    'akan datang': { label: 'Akan Datang', cls: 'badge-warning' },
+                    'berjalan': { label: 'Berjalan', cls: 'badge-success' },
+                    'selesai': { label: 'Selesai', cls: 'badge-info' }
+                };
+                const status = statusMap[p.status] || { label: p.status, cls: 'badge-info' };
+                return `
+                    <div class="bg-dark-card p-5 rounded-xl border border-[#2a2a2a] card-hover" data-status="${p.status}">
+                        <h3 class="text-xl font-bold text-[#D62828]">${p.nama}</h3>
+                        <p class="text-gray-300 text-sm my-2">${p.deskripsi}</p>
+                        <p class="text-xs text-gray-400">📅 ${p.tanggal}</p>
+                        <span class="inline-block mt-2 text-xs ${status.cls} px-3 py-1 rounded-full">${status.label}</span>
+                        ${currentUser ? `<button onclick="editProker(${p.id})" class="text-xs text-gray-400 hover:text-[#D62828] ml-2"><i class="fas fa-edit"></i></button>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+       function renderBerita() {
+    const grid = document.getElementById('beritaGrid');
+
+    grid.innerHTML = db.berita.map(b => `
+        <div class="bg-dark p-6 rounded-xl border border-[#2a2a2a]">
+
+            <h4 class="text-xl font-bold">${b.judul}</h4>
+
+            <p class="text-sm text-gray-400">${b.tanggal}</p>
+
+            <p class="mt-2 text-gray-300">${b.isi}</p>
+
+            ${currentUser ? `
+            <div class="flex justify-center gap-3 mt-3">
+
+                <button onclick="editBerita(${b.id})"
+                    class="text-gray-400 hover:text-blue-500">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <button onclick="hapusBerita(${b.id})"
+                    class="text-gray-400 hover:text-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+            </div>
+            ` : ''}
+
+        </div>
+    `).join('');
+}
+
+        function renderGaleri() {
+            const grid = document.getElementById('galeriGrid');
+            grid.innerHTML = db.galeri.map((url, index) => `
+                <div class="relative group">
+                    <img src="${url}" alt="Foto kegiatan" onclick="openLightbox('${url}')" class="w-full h-48 object-cover rounded-xl cursor-pointer hover:opacity-90 transition" />
+                    ${currentUser ? `<button onclick="hapusGaleri(${index})" class="absolute top-2 right-2 bg-black/70 text-white p-1 rounded-full text-xs hover:bg-[#D62828]"><i class="fas fa-trash"></i></button>` : ''}
+                </div>
+            `).join('');
+        }
+
+       function renderDokumen() {
+    const grid = document.getElementById('dokumenGrid');
+
+    grid.innerHTML = db.dokumen.map(d => `
+        <div class="bg-dark p-4 rounded-xl border border-[#2a2a2a] card-hover">
+
+            <i class="fas ${d.ikon} text-3xl text-[#D62828]"></i>
+
+            <p class="mt-2 font-semibold">${d.nama}</p>
+
+            ${currentUser ? `
+            <div class="flex justify-center gap-3 mt-3">
+
+                <button onclick="editDokumen(${d.id})"
+                    class="text-gray-400 hover:text-blue-500">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <button onclick="hapusDokumen(${d.id})"
+                    class="text-gray-400 hover:text-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+            </div>
+            ` : ''}
+
+        </div>
+    `).join('');
+}
+
+        function renderPengumuman() {
+    const list = document.getElementById('pengumumanList');
+
+    list.innerHTML = db.pengumuman.map(p => `
+        <div class="timeline-item">
+
+            <h4 class="font-bold">${p.judul}</h4>
+
+            <p class="text-sm text-gray-400">${p.tanggal}</p>
+
+            <p class="text-gray-300">${p.isi}</p>
+
+            ${currentUser ? `
+            <div class="flex justify-center gap-3 mt-3">
+
+                <button onclick="editPengumuman(${p.id})"
+                    class="text-gray-400 hover:text-blue-500">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <button onclick="hapusPengumuman(${p.id})"
+                    class="text-gray-400 hover:text-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+            </div>
+            ` : ''}
+
+        </div>
+    `).join('');
+}
+
+        function renderKalender() {
+            const grid = document.getElementById('kalenderGrid');
+            const today = new Date();
+            const month = today.getMonth();
+            const year = today.getFullYear();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            let html = '';
+            // Empty cells for first week
+            for (let i = 0; i < (firstDay === 0 ? 6 : firstDay - 1); i++) {
+                html += `<span class="p-2"></span>`;
+            }
+            for (let d = 1; d <= daysInMonth; d++) {
+                const isToday = d === today.getDate() ? 'bg-[#D62828]/20 rounded-full' : '';
+                html += `<span class="p-2 ${isToday}">${d}</span>`;
+            }
+            grid.innerHTML = html;
+        }
+
+        function updateStats() {
+            document.getElementById('totalAnggota').textContent = db.anggota.length;
+            document.getElementById('totalProker').textContent = db.proker.length;
+        }
+
+        // ============================================
+        // FUNGSI CRUD
+        // ============================================
+        // Pengurus
+        function editPengurus(id) {
+            const p = db.pengurus.find(item => item.id === id);
+            if (!p) return;
+            currentEditId = id;
+            currentEditType = 'pengurus';
+            openFormModal('Edit Pengurus', `
+                <div class="mb-3"><label>Nama</label><input id="formNama" value="${p.nama}" /></div>
+                <div class="mb-3"><label>Jabatan</label><input id="formJabatan" value="${p.jabatan}" /></div>
+                <div class="mb-3"><label>URL Foto</label><input id="formFoto" value="${p.foto}" /></div>
+                <button onclick="savePengurus()" class="btn-primary w-full">Simpan</button>
+            `);
+        }
+
+        function savePengurus() {
+            const nama = document.getElementById('formNama').value.trim();
+            const jabatan = document.getElementById('formJabatan').value.trim();
+            const foto = document.getElementById('formFoto').value.trim();
+            if (!nama || !jabatan || !foto) { showToast('Semua field harus diisi!', 'error'); return; }
+            const p = db.pengurus.find(item => item.id === currentEditId);
+            if (p) { p.nama = nama;
+                p.jabatan = jabatan;
+                p.foto = foto;
+                saveData();
+                renderStruktur();
+                showToast('Pengurus berhasil diupdate!');
+                closeFormModal(); }
+        }
+
+        // Proker
+        function editProker(id) {
+            const p = db.proker.find(item => item.id === id);
+            if (!p) return;
+            currentEditId = id;
+            currentEditType = 'proker';
+            openFormModal('Edit Program Kerja', `
+                <div class="mb-3"><label>Nama Kegiatan</label><input id="formNama" value="${p.nama}" /></div>
+                <div class="mb-3"><label>Deskripsi</label><textarea id="formDeskripsi">${p.deskripsi}</textarea></div>
+                <div class="mb-3"><label>Tanggal</label><input id="formTanggal" value="${p.tanggal}" /></div>
+                <div class="mb-3"><label>Status</label>
+                    <select id="formStatus">
+                        <option value="akan datang" ${p.status === 'akan datang' ? 'selected' : ''}>Akan Datang</option>
+                        <option value="berjalan" ${p.status === 'berjalan' ? 'selected' : ''}>Berjalan</option>
+                        <option value="selesai" ${p.status === 'selesai' ? 'selected' : ''}>Selesai</option>
+                    </select>
+                </div>
+                <button onclick="saveProker()" class="btn-primary w-full">Simpan</button>
+            `);
+        }
+
+        function saveProker() {
+            const nama = document.getElementById('formNama').value.trim();
+            const deskripsi = document.getElementById('formDeskripsi').value.trim();
+            const tanggal = document.getElementById('formTanggal').value.trim();
+            const status = document.getElementById('formStatus').value;
+            if (!nama || !deskripsi || !tanggal) { showToast('Semua field harus diisi!', 'error'); return; }
+            const p = db.proker.find(item => item.id === currentEditId);
+            if (p) { p.nama = nama;
+                p.deskripsi = deskripsi;
+                p.tanggal = tanggal;
+                p.status = status;
+                saveData();
+                renderProker();
+                updateStats();
+                showToast('Program kerja berhasil diupdate!');
+                closeFormModal(); }
+        }
+
+        function tambahProker() {
+            currentEditId = null;
+            currentEditType = 'proker';
+            openFormModal('Tambah Program Kerja', `
+                <div class="mb-3"><label>Nama Kegiatan</label><input id="formNama" placeholder="Nama kegiatan" /></div>
+                <div class="mb-3"><label>Deskripsi</label><textarea id="formDeskripsi" placeholder="Deskripsi kegiatan"></textarea></div>
+                <div class="mb-3"><label>Tanggal</label><input id="formTanggal" placeholder="Contoh: 20 Juli 2026" /></div>
+                <div class="mb-3"><label>Status</label>
+                    <select id="formStatus">
+                        <option value="akan datang">Akan Datang</option>
+                        <option value="berjalan">Berjalan</option>
+                        <option value="selesai">Selesai</option>
+                    </select>
+                </div>
+                <button onclick="saveProkerBaru()" class="btn-primary w-full">Tambah</button>
+            `);
+        }
+
+        function saveProkerBaru() {
+            const nama = document.getElementById('formNama').value.trim();
+            const deskripsi = document.getElementById('formDeskripsi').value.trim();
+            const tanggal = document.getElementById('formTanggal').value.trim();
+            const status = document.getElementById('formStatus').value;
+            if (!nama || !deskripsi || !tanggal) { showToast('Semua field harus diisi!', 'error'); return; }
+            db.proker.push({ id: getNextId(db.proker), nama, deskripsi, tanggal, status });
+            saveData();
+            renderProker();
+            updateStats();
+            showToast('Program kerja berhasil ditambahkan!');
+            closeFormModal();
+        }
+
+        // Berita
+        function editBerita(id) {
+            const b = db.berita.find(item => item.id === id);
+            if (!b) return;
+            currentEditId = id;
+            currentEditType = 'berita';
+            openFormModal('Edit Berita', `
+                <div class="mb-3"><label>Judul</label><input id="formJudul" value="${b.judul}" /></div>
+                <div class="mb-3"><label>Tanggal</label><input id="formTanggal" value="${b.tanggal}" /></div>
+                <div class="mb-3"><label>Isi</label><textarea id="formIsi">${b.isi}</textarea></div>
+                <button onclick="saveBerita()" class="btn-primary w-full">Simpan</button>
+            `);
+        }
+
+        function saveBerita() {
+            const judul = document.getElementById('formJudul').value.trim();
+            const tanggal = document.getElementById('formTanggal').value.trim();
+            const isi = document.getElementById('formIsi').value.trim();
+            if (!judul || !tanggal || !isi) { showToast('Semua field harus diisi!', 'error'); return; }
+            const b = db.berita.find(item => item.id === currentEditId);
+            if (b) { b.judul = judul;
+                b.tanggal = tanggal;
+                b.isi = isi;
+                saveData();
+                renderBerita();
+                showToast('Berita berhasil diupdate!');
+                closeFormModal(); }
+        }
+
+        function tambahBerita() {
+            currentEditId = null;
+            currentEditType = 'berita';
+            openFormModal('Tambah Berita', `
+                <div class="mb-3"><label>Judul</label><input id="formJudul" placeholder="Judul berita" /></div>
+                <div class="mb-3"><label>Tanggal</label><input id="formTanggal" placeholder="Contoh: 20 Juli 2026" /></div>
+                <div class="mb-3"><label>Isi</label><textarea id="formIsi" placeholder="Isi berita"></textarea></div>
+                <button onclick="saveBeritaBaru()" class="btn-primary w-full">Tambah</button>
+            `);
+        }
+
+        function saveBeritaBaru() {
+            const judul = document.getElementById('formJudul').value.trim();
+            const tanggal = document.getElementById('formTanggal').value.trim();
+            const isi = document.getElementById('formIsi').value.trim();
+            if (!judul || !tanggal || !isi) { showToast('Semua field harus diisi!', 'error'); return; }
+            db.berita.push({ id: getNextId(db.berita), judul, tanggal, isi });
+            saveData();
+            renderBerita();
+            showToast('Berita berhasil ditambahkan!');
+            closeFormModal();
+        }
+
+        // Galeri
+        function tambahGaleri() {
+            openFormModal('Tambah Foto Galeri', `
+                <div class="mb-3"><label>URL Foto</label><input id="formFoto" placeholder="Masukkan URL gambar" /></div>
+                <button onclick="saveGaleriBaru()" class="btn-primary w-full">Tambah</button>
+            `);
+        }
+
+        function saveGaleriBaru() {
+            const url = document.getElementById('formFoto').value.trim();
+            if (!url) { showToast('URL foto harus diisi!', 'error'); return; }
+            db.galeri.push(url);
+            saveData();
+            renderGaleri();
+            showToast('Foto berhasil ditambahkan!');
+            closeFormModal();
+        }
+
+        function hapusGaleri(index) {
+            if (confirm('Yakin ingin menghapus foto ini?')) {
+                db.galeri.splice(index, 1);
+                saveData();
+                renderGaleri();
+                showToast('Foto berhasil dihapus!');
+            }
+        }
+
+        // Dokumen
+        function editDokumen(id) {
+            const d = db.dokumen.find(item => item.id === id);
+            if (!d) return;
+            currentEditId = id;
+            currentEditType = 'dokumen';
+            openFormModal('Edit Dokumen', `
+                <div class="mb-3"><label>Nama Dokumen</label><input id="formNama" value="${d.nama}" /></div>
+                <div class="mb-3"><label>Ikon (Font Awesome)</label><input id="formIkon" value="${d.ikon}" placeholder="fa-file-pdf" /></div>
+                <button onclick="saveDokumen()" class="btn-primary w-full">Simpan</button>
+            `);
+        }
+
+        function saveDokumen() {
+            const nama = document.getElementById('formNama').value.trim();
+            const ikon = document.getElementById('formIkon').value.trim();
+            if (!nama || !ikon) { showToast('Semua field harus diisi!', 'error'); return; }
+            const d = db.dokumen.find(item => item.id === currentEditId);
+            if (d) { d.nama = nama;
+                d.ikon = ikon;
+                saveData();
+                renderDokumen();
+                showToast('Dokumen berhasil diupdate!');
+                closeFormModal(); }
+        }
+
+        function tambahDokumen() {
+            currentEditId = null;
+            currentEditType = 'dokumen';
+            openFormModal('Tambah Dokumen', `
+                <div class="mb-3"><label>Nama Dokumen</label><input id="formNama" placeholder="Nama dokumen" /></div>
+                <div class="mb-3"><label>Ikon (Font Awesome)</label><input id="formIkon" placeholder="fa-file-pdf" value="fa-file-pdf" /></div>
+                <button onclick="saveDokumenBaru()" class="btn-primary w-full">Tambah</button>
+            `);
+        }
+
+        function saveDokumenBaru() {
+            const nama = document.getElementById('formNama').value.trim();
+            const ikon = document.getElementById('formIkon').value.trim();
+            if (!nama || !ikon) { showToast('Semua field harus diisi!', 'error'); return; }
+            db.dokumen.push({ id: getNextId(db.dokumen), nama, ikon });
+            saveData();
+            renderDokumen();
+            showToast('Dokumen berhasil ditambahkan!');
+            closeFormModal();
+        }
+
+        // Pengumuman
+        function editPengumuman(id) {
+            const p = db.pengumuman.find(item => item.id === id);
+            if (!p) return;
+            currentEditId = id;
+            currentEditType = 'pengumuman';
+            openFormModal('Edit Pengumuman', `
+                <div class="mb-3"><label>Judul</label><input id="formJudul" value="${p.judul}" /></div>
+                <div class="mb-3"><label>Tanggal</label><input id="formTanggal" value="${p.tanggal}" /></div>
+                <div class="mb-3"><label>Isi</label><textarea id="formIsi">${p.isi}</textarea></div>
+                <button onclick="savePengumuman()" class="btn-primary w-full">Simpan</button>
+            `);
+        }
+
+        function savePengumuman() {
+            const judul = document.getElementById('formJudul').value.trim();
+            const tanggal = document.getElementById('formTanggal').value.trim();
+            const isi = document.getElementById('formIsi').value.trim();
+            if (!judul || !tanggal || !isi) { showToast('Semua field harus diisi!', 'error'); return; }
+            const p = db.pengumuman.find(item => item.id === currentEditId);
+            if (p) { p.judul = judul;
+                p.tanggal = tanggal;
+                p.isi = isi;
+                saveData();
+                renderPengumuman();
+                showToast('Pengumuman berhasil diupdate!');
+                closeFormModal(); }
+        }
+
+        function tambahPengumuman() {
+            currentEditId = null;
+            currentEditType = 'pengumuman';
+            openFormModal('Tambah Pengumuman', `
+                <div class="mb-3"><label>Judul</label><input id="formJudul" placeholder="Judul pengumuman" /></div>
+                <div class="mb-3"><label>Tanggal</label><input id="formTanggal" placeholder="Contoh: 20 Juli 2026" /></div>
+                <div class="mb-3"><label>Isi</label><textarea id="formIsi" placeholder="Isi pengumuman"></textarea></div>
+                <button onclick="savePengumumanBaru()" class="btn-primary w-full">Tambah</button>
+            `);
+        }
+
+        function savePengumumanBaru() {
+            const judul = document.getElementById('formJudul').value.trim();
+            const tanggal = document.getElementById('formTanggal').value.trim();
+            const isi = document.getElementById('formIsi').value.trim();
+            if (!judul || !tanggal || !isi) { showToast('Semua field harus diisi!', 'error'); return; }
+            db.pengumuman.push({ id: getNextId(db.pengumuman), judul, tanggal, isi });
+            saveData();
+            renderPengumuman();
+            showToast('Pengumuman berhasil ditambahkan!');
+            closeFormModal();
+        }
+
+        // ============================================
+        // FUNGSI FORM LAINNYA
+        // ============================================
+        function daftarAnggota() {
+            const nama = document.getElementById('daftarNama').value.trim();
+            const email = document.getElementById('daftarEmail').value.trim();
+            const jurusan = document.getElementById('daftarJurusan').value.trim();
+            if (!nama || !email || !jurusan) { showToast('Semua field harus diisi!', 'error'); return; }
+            db.anggota.push({ id: getNextId(db.anggota), nama, email, jurusan });
+            saveData();
+            document.getElementById('daftarNama').value = '';
+            document.getElementById('daftarEmail').value = '';
+            document.getElementById('daftarJurusan').value = '';
+            updateStats();
+            showToast('Pendaftaran berhasil! Selamat bergabung!');
+        }
+
+        function kirimPesan() {
+            const nama = document.getElementById('pesanNama').value.trim();
+            const email = document.getElementById('pesanEmail').value.trim();
+            const isi = document.getElementById('pesanIsi').value.trim();
+            if (!nama || !email || !isi) { showToast('Semua field harus diisi!', 'error'); return; }
+            db.pesan.push({ id: getNextId(db.pesan), nama, email, isi });
+            saveData();
+            document.getElementById('pesanNama').value = '';
+            document.getElementById('pesanEmail').value = '';
+            document.getElementById('pesanIsi').value = '';
+            showToast('Pesan berhasil dikirim!');
+        }
+
+        // ============================================
+        // FUNGSI MODAL
+        // ============================================
+        function openFormModal(title, body) {
+            document.getElementById('formModalTitle').textContent = title;
+            document.getElementById('formModalBody').innerHTML = body;
+            document.getElementById('formModal').classList.add('active');
+        }
+
+        function closeFormModal() {
+            document.getElementById('formModal').classList.remove('active');
+            currentEditId = null;
+            currentEditType = null;
+        }
+
+        function openTab(type) {
+            const map = {
+                'berita': 'berita',
+                'galeri': 'galeri',
+                'struktur': 'struktur',
+                'proker': 'proker',
+                'dokumen': 'dokumen',
+                'pengumuman': 'pengumuman'
+            };
+            const target = map[type];
+            if (target) {
+                document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+                // Trigger tombol tambah
+                if (target === 'proker') tambahProker();
+                else if (target === 'berita') tambahBerita();
+                else if (target === 'galeri') tambahGaleri();
+                else if (target === 'dokumen') tambahDokumen();
+                else if (target === 'pengumuman') tambahPengumuman();
+                else if (target === 'struktur') {
+                    showToast('Edit pengurus dengan klik icon edit di setiap kartu');
+                }
+            }
+        }
+
+        // ============================================
+        // FUNGSI LIGHTBOX
+        // ============================================
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // ============================================
+        // FILTER PROGRAM KERJA
+        // ============================================
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('filter-btn')) {
+                const filter = e.target.dataset.filter;
+                document.querySelectorAll('#prokerGrid .bg-dark-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.status === filter) card.style.display = 'block';
+                    else card.style.display = 'none';
+                });
+            }
+        });
+
+        // ============================================
+        // SEARCH BERITA
+        // ============================================
+        document.addEventListener('input', function(e) {
+            if (e.target.id === 'searchBerita') {
+                const query = e.target.value.toLowerCase();
+                document.querySelectorAll('#beritaGrid .bg-dark').forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    card.style.display = text.includes(query) ? 'block' : 'none';
+                });
+            }
+        });
+
+        // ============================================
+        // NAVBAR & SCROLL
+        // ============================================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) navbar.classList.add('navbar-scrolled');
+            else navbar.classList.remove('navbar-scrolled');
+            const btn = document.getElementById('backToTop');
+            if (window.scrollY > 500) btn.classList.add('show');
+            else btn.classList.remove('show');
+        });
+        document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ============================================
+        // MOBILE MENU
+        // ============================================
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('-translate-y-full');
+        });
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('-translate-y-full'));
+        });
+        document.getElementById('mobileLoginBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.add('-translate-y-full');
+            openLoginModal();
+        });
+        document.getElementById('mobileLogoutBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.add('-translate-y-full');
+            logout();
+        });
+
+        // ============================================
+        // LOGIN BUTTONS
+        // ============================================
+        document.getElementById('loginBtn').addEventListener('click', openLoginModal);
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+
+        // Tombol tambah
+        document.getElementById('tambahProkerBtn').addEventListener('click', tambahProker);
+        document.getElementById('tambahBeritaBtn').addEventListener('click', tambahBerita);
+        document.getElementById('tambahGaleriBtn').addEventListener('click', tambahGaleri);
+        document.getElementById('tambahDokumenBtn').addEventListener('click', tambahDokumen);
+        document.getElementById('tambahPengumumanBtn').addEventListener('click', tambahPengumuman);
+
+        // ============================================
+        // INIT
+        // ============================================
+        loadData();
+        checkAuth();
+
+        // Tambahkan style untuk timeline
+        const style = document.createElement('style');
+        style.textContent = `
+            .timeline-item { border-left: 3px solid #D62828; padding-left: 20px; position: relative; margin-bottom: 24px; }
+            .timeline-item::before { content: ''; position: absolute; left: -7px; top: 4px; width: 12px; height: 12px; background: #D62828; border-radius: 50%; }
+        `;
+        document.head.appendChild(style);
+
+        console.log('🚀 HIMANIKA Website loaded successfully!');
+        console.log('📊 Data tersimpan di localStorage');
+        console.log('👤 Login: admin / himanika2026');
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
