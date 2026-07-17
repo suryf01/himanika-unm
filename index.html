@@ -415,10 +415,9 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-2"><span class="text-[#D62828]">Struktur</span> Organisasi</h2>
                 <p class="text-center text-gray-400 mb-12">Pengurus HIMANIKA periode 2025/2026</p>
                 <div id="strukturGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                    <!-- Akan diisi oleh JavaScript -->
                 </div>
                 <div class="text-center mt-8">
-                    <button id="editStrukturBtn" class="btn-secondary hidden">Edit Struktur</button>
+                    <button id="editStrukturBtn" class="btn-secondary ">Edit Struktur</button>
                 </div>
             </div>
         </section>
@@ -437,7 +436,7 @@
                     <!-- Akan diisi oleh JavaScript -->
                 </div>
                 <div class="text-center mt-8">
-                    <button id="tambahProkerBtn" class="btn-primary hidden"><i class="fas fa-plus mr-2"></i>Tambah Program Kerja</button>
+                    <button id="tambahProkerBtn" class="btn-primary "><i class="fas fa-plus mr-2"></i>Tambah Program Kerja</button>
                 </div>
             </div>
         </section>
@@ -691,6 +690,7 @@
                 { id: 6, nama: 'Diana Kartika', jabatan: 'Bidang Kominfo', foto: 'https://i.pravatar.cc/150?img=6' },
                 { id: 7, nama: 'Eko Prasetyo', jabatan: 'Bidang Kewirausahaan', foto: 'https://i.pravatar.cc/150?img=7' },
                 { id: 8, nama: 'Lestari Handayani', jabatan: 'Bidang Sosmas', foto: 'https://i.pravatar.cc/150?img=8' }
+                
             ],
             proker: [
                 { id: 1, nama: 'Workshop IoT', deskripsi: 'Pelatihan dasar Internet of Things untuk anggota', tanggal: '20 Juli 2026',
@@ -891,16 +891,35 @@
         // RENDER FUNGSI
         // ============================================
         function renderStruktur() {
-            const grid = document.getElementById('strukturGrid');
-            grid.innerHTML = db.pengurus.map(p => `
-                <div class="bg-dark p-5 rounded-xl text-center border border-[#2a2a2a] card-hover">
-                    <img src="${p.foto}" alt="${p.nama}" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-[#D62828] object-cover" />
-                    <h4 class="font-bold">${p.nama}</h4>
-                    <p class="text-sm text-[#D62828]">${p.jabatan}</p>
-                    ${currentUser ? `<button onclick="editPengurus(${p.id})" class="text-xs text-gray-400 hover:text-[#D62828] mt-2"><i class="fas fa-edit"></i></button>` : ''}
+    const grid = document.getElementById('strukturGrid');
+
+    grid.innerHTML = db.pengurus.map(p => `
+        <div class="bg-dark p-5 rounded-xl text-center border border-[#2a2a2a] card-hover">
+            <img src="${p.foto}" alt="${p.nama}" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-[#D62828] object-cover" />
+
+            <h4 class="font-bold">${p.nama}</h4>
+
+            <p class="text-sm text-[#D62828]">${p.jabatan}</p>
+
+            ${currentUser ? `
+                <div class="flex justify-center gap-3 mt-3">
+
+                    <button onclick="editPengurus(${p.id})"
+                        class="text-gray-400 hover:text-blue-500">
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                    <button onclick="hapusPengurus(${p.id})"
+                        class="text-gray-400 hover:text-red-500">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
                 </div>
-            `).join('');
-        }
+            ` : ''}
+
+        </div>
+    `).join('');
+}
 
         function renderProker() {
             const grid = document.getElementById('prokerGrid');
@@ -923,17 +942,37 @@
             }).join('');
         }
 
-        function renderBerita() {
-            const grid = document.getElementById('beritaGrid');
-            grid.innerHTML = db.berita.map(b => `
-                <div class="bg-dark p-6 rounded-xl border border-[#2a2a2a]">
-                    <h4 class="text-xl font-bold">${b.judul}</h4>
-                    <p class="text-sm text-gray-400">${b.tanggal}</p>
-                    <p class="mt-2 text-gray-300">${b.isi}</p>
-                    ${currentUser ? `<button onclick="editBerita(${b.id})" class="text-xs text-gray-400 hover:text-[#D62828] mt-2"><i class="fas fa-edit"></i></button>` : ''}
-                </div>
-            `).join('');
-        }
+       function renderBerita() {
+    const grid = document.getElementById('beritaGrid');
+
+    grid.innerHTML = db.berita.map(b => `
+        <div class="bg-dark p-6 rounded-xl border border-[#2a2a2a]">
+
+            <h4 class="text-xl font-bold">${b.judul}</h4>
+
+            <p class="text-sm text-gray-400">${b.tanggal}</p>
+
+            <p class="mt-2 text-gray-300">${b.isi}</p>
+
+            ${currentUser ? `
+            <div class="flex justify-center gap-3 mt-3">
+
+                <button onclick="editBerita(${b.id})"
+                    class="text-gray-400 hover:text-blue-500">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <button onclick="hapusBerita(${b.id})"
+                    class="text-gray-400 hover:text-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+            </div>
+            ` : ''}
+
+        </div>
+    `).join('');
+}
 
         function renderGaleri() {
             const grid = document.getElementById('galeriGrid');
@@ -945,28 +984,67 @@
             `).join('');
         }
 
-        function renderDokumen() {
-            const grid = document.getElementById('dokumenGrid');
-            grid.innerHTML = db.dokumen.map(d => `
-                <div class="bg-dark p-4 rounded-xl border border-[#2a2a2a] card-hover">
-                    <i class="fas ${d.ikon} text-3xl text-[#D62828]"></i>
-                    <p class="mt-2 font-semibold">${d.nama}</p>
-                    ${currentUser ? `<button onclick="editDokumen(${d.id})" class="text-xs text-gray-400 hover:text-[#D62828] mt-1"><i class="fas fa-edit"></i></button>` : ''}
-                </div>
-            `).join('');
-        }
+       function renderDokumen() {
+    const grid = document.getElementById('dokumenGrid');
+
+    grid.innerHTML = db.dokumen.map(d => `
+        <div class="bg-dark p-4 rounded-xl border border-[#2a2a2a] card-hover">
+
+            <i class="fas ${d.ikon} text-3xl text-[#D62828]"></i>
+
+            <p class="mt-2 font-semibold">${d.nama}</p>
+
+            ${currentUser ? `
+            <div class="flex justify-center gap-3 mt-3">
+
+                <button onclick="editDokumen(${d.id})"
+                    class="text-gray-400 hover:text-blue-500">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <button onclick="hapusDokumen(${d.id})"
+                    class="text-gray-400 hover:text-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+            </div>
+            ` : ''}
+
+        </div>
+    `).join('');
+}
 
         function renderPengumuman() {
-            const list = document.getElementById('pengumumanList');
-            list.innerHTML = db.pengumuman.map(p => `
-                <div class="timeline-item">
-                    <h4 class="font-bold">${p.judul}</h4>
-                    <p class="text-sm text-gray-400">${p.tanggal}</p>
-                    <p class="text-gray-300">${p.isi}</p>
-                    ${currentUser ? `<button onclick="editPengumuman(${p.id})" class="text-xs text-gray-400 hover:text-[#D62828] mt-1"><i class="fas fa-edit"></i></button>` : ''}
-                </div>
-            `).join('');
-        }
+    const list = document.getElementById('pengumumanList');
+
+    list.innerHTML = db.pengumuman.map(p => `
+        <div class="timeline-item">
+
+            <h4 class="font-bold">${p.judul}</h4>
+
+            <p class="text-sm text-gray-400">${p.tanggal}</p>
+
+            <p class="text-gray-300">${p.isi}</p>
+
+            ${currentUser ? `
+            <div class="flex justify-center gap-3 mt-3">
+
+                <button onclick="editPengumuman(${p.id})"
+                    class="text-gray-400 hover:text-blue-500">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <button onclick="hapusPengumuman(${p.id})"
+                    class="text-gray-400 hover:text-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+            </div>
+            ` : ''}
+
+        </div>
+    `).join('');
+}
 
         function renderKalender() {
             const grid = document.getElementById('kalenderGrid');
@@ -1443,5 +1521,6 @@
         console.log('📊 Data tersimpan di localStorage');
         console.log('👤 Login: admin / himanika2026');
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
